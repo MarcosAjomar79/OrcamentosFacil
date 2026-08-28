@@ -7,7 +7,7 @@ object Formatacao {
 
     private val formatoMoeda = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
 
-    fun Moeda (valor: Double): String {
+    fun moeda (valor: Double): String {
         return formatoMoeda.format(valor)
     }
 

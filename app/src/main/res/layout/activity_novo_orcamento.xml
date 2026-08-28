@@ -1,10 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NovoOrcamentoActivity">
+    android:background="#F5F5F5">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Novo Orçamento"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#1E3A5F" />
+
+        <EditText
+            android:id="@+id/edtCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome do cliente"
+            android:inputType="textCapWords"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/edtTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Telefone / WhatsApp"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/edtValidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Validade do orçamento" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adicionar Produto ou Serviço"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp" />
+
+        <EditText
+            android:id="@+id/edtDescricaoItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Produto ou serviço" />
+
+        <EditText
+            android:id="@+id/edtQuantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantidade"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/edtValorUnitario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Valor unitário"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btnAdicionarItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADICIONAR ITEM"
+            android:layout_marginTop="10dp" />
+
+        <ListView
+            android:id="@+id/listItens"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total: R$ 0,00"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#1E3A5F"
+            android:gravity="end"
+            android:layout_marginTop="15dp" />
+
+        <EditText
+            android:id="@+id/edtObservacoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Observações / condições de pagamento"
+            android:minLines="3"
+            android:gravity="top"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/btnSalvarOrcamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SALVAR ORÇAMENTO"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CANCELAR" />
+
+    </LinearLayout>
+
+</ScrollView>
