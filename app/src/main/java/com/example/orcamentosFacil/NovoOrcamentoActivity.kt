@@ -1,17 +1,16 @@
-package com.example.myapplication
+package com.example.orcamentosFacil
 
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.ListView
+import android.widget.Toast
+import android.widget.Button
 class NovoOrcamentoActivity : AppCompatActivity() {
 
-    // Lista temporária dos itens enquanto o orçamento está sendo montado.
     private val itens = mutableListOf<ItemOrcamento>()
 
     private lateinit var adapter: ArrayAdapter<String>
@@ -19,6 +18,7 @@ class NovoOrcamentoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_novo_orcamento)
 
         txtTotal = findViewById(R.id.txtTotal)
@@ -133,5 +133,5 @@ class NovoOrcamentoActivity : AppCompatActivity() {
 
         txtTotal.text =
             "Total: ${Formatacao.moeda(total)}"
+        }
     }
-}

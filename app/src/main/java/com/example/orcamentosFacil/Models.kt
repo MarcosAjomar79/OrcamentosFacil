@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.orcamentosFacil
 
 data class ItemOrcamento (
     val descricao: String,

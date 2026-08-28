@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.example.orcamentosFacil"
     compileSdk {
         version = release(37)
     }
