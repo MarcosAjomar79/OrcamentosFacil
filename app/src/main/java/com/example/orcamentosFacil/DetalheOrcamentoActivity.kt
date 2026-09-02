@@ -8,7 +8,8 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
+import android.content.ClipData
+import android.content.Intent
 class DetalheOrcamentoActivity : AppCompatActivity() {
 
     private lateinit var db: DatabaseHelper
@@ -26,6 +27,13 @@ class DetalheOrcamentoActivity : AppCompatActivity() {
             "orcamento_id",
             -1
         )
+
+        findViewById<Button>(
+            R.id.btnGerarPdf
+        ).setOnClickListener {
+
+            gerarPdf()
+        }
 
         if (orcamentoId == -1L) {
 
@@ -132,5 +140,69 @@ class DetalheOrcamentoActivity : AppCompatActivity() {
                 null
             )
             .show()
+    }
+    private fun gerarPdf() {
+
+        val orcamento =
+            db.buscarOrcamento(orcamentoId)
+
+        if (orcamento == null) {
+
+            Toast.makeText(
+                this,
+                "Orçamento não encontrado.",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        val itens =
+            db.buscarItens(orcamentoId)
+
+        try {
+
+            val uri = PdfHelper.gerar(
+                this,
+                orcamento,
+                itens
+            )
+
+            val compartilhar =
+                Intent(Intent.ACTION_SEND).apply {
+
+                    type = "application/pdf"
+
+                    putExtra(
+                        Intent.EXTRA_STREAM,
+                        uri
+                    )
+
+                    addFlags(
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+
+                    clipData =
+                        ClipData.newRawUri(
+                            "Orçamento",
+                            uri
+                        )
+                }
+
+            startActivity(
+                Intent.createChooser(
+                    compartilhar,
+                    "Compartilhar orçamento"
+                )
+            )
+
+        } catch (e: Exception) {
+
+            Toast.makeText(
+                this,
+                "Não foi possível gerar o PDF: ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }
