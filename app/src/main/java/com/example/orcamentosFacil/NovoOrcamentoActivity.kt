@@ -9,17 +9,21 @@ import android.widget.TextView
 import android.widget.ListView
 import android.widget.Toast
 import android.widget.Button
+import kotlin.toString
+
 class NovoOrcamentoActivity : AppCompatActivity() {
 
     private val itens = mutableListOf<ItemOrcamento>()
 
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var txtTotal: TextView
+    private lateinit var db: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_novo_orcamento)
+        db = DatabaseHelper(this)
 
         txtTotal = findViewById(R.id.txtTotal)
 
@@ -44,6 +48,10 @@ class NovoOrcamentoActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btnCancelar).setOnClickListener {
             finish()
+        }
+        findViewById<Button>(R.id.btnSalvarOrcamento).setOnClickListener {
+            Toast.makeText(this, "BOTÃO SALVAR CLICADO", Toast.LENGTH_SHORT).show()
+            salvarOrcamento()
         }
 
         // Toque longo remove um item.
@@ -133,5 +141,67 @@ class NovoOrcamentoActivity : AppCompatActivity() {
 
         txtTotal.text =
             "Total: ${Formatacao.moeda(total)}"
-        }
     }
+
+    private fun salvarOrcamento() {
+
+        val cliente = findViewById<EditText>(R.id.edtCliente)
+            .text
+            .toString()
+            .trim()
+
+        val telefone = findViewById<EditText>(R.id.edtTelefone)
+            .text
+            .toString()
+            .trim()
+
+        val validade = findViewById<EditText>(R.id.edtValidade)
+            .text
+            .toString()
+            .trim()
+
+        val observacoes = findViewById<EditText>(R.id.edtObservacoes)
+            .text
+            .toString()
+            .trim()
+
+        if (cliente.isEmpty()) {
+
+            Toast.makeText(
+                this,
+                "Informe o nome do cliente.",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        if (itens.isEmpty()) {
+
+            Toast.makeText(
+                this,
+                "Adicione pelo menos um item.",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            return
+        }
+
+        val id = db.salvarOrcamento(
+            cliente = cliente,
+            telefone = telefone,
+            validade = validade,
+            observacoes = observacoes,
+            itens = itens
+        )
+
+        Toast.makeText(
+            this,
+            "Orçamento salvo! ID: $id",
+            Toast.LENGTH_SHORT
+        ).show()
+
+        finish()
+    }
+
+}

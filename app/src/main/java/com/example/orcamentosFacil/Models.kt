@@ -9,7 +9,7 @@ data class ItemOrcamento (
         get() = quantidade * valorUnitario
 }
 data class Orcamento (
-    val id: String,
+    val id: Long,
     val numero: String,
     val cliente: String,
     val telefone: String,
