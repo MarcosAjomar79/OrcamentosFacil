@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="brand_primary">#1E3A5F</color>
+    <color name="brand_primary_dark">#152A45</color>
+    <color name="brand_accent">#2E5B8A</color>
+
+    <color name="screen_background">#F4F7FB</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="field_background">#FFFFFF</color>
+
+    <color name="text_primary">#1B2430</color>
+    <color name="text_secondary">#5B6574</color>
+    <color name="text_hint">#8A94A6</color>
+
+    <color name="button_primary_text">#FFFFFF</color>
+    <color name="button_secondary_text">#1E3A5F</color>
+
+    <color name="border_light">#D9E2EC</color>
+    <color name="danger">#C62828</color>
 </resources>
