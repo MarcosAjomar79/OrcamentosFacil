@@ -23,6 +23,18 @@
         android:textColor="@color/text_secondary"
         android:layout_marginTop="6dp" />
 
+    <EditText
+        android:id="@+id/edtBuscarOrcamento"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_input"
+        android:hint="Buscar por cliente ou nº do orçamento"
+        android:paddingHorizontal="14dp"
+        android:singleLine="true"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_hint"
+        android:layout_marginTop="18dp" />
+
     <TextView
         android:id="@+id/txtQuantidadeOrcamentos"
         android:layout_width="match_parent"
@@ -41,10 +53,22 @@
         android:orientation="vertical"
         android:background="@drawable/bg_card">
 
+        <TextView
+            android:id="@+id/txtListaVazia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nenhum orçamento encontrado."
+            android:textSize="15sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone" />
+
         <ListView
             android:id="@+id/listOrcamentos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:divider="@color/border_light"
             android:dividerHeight="1dp"
             android:padding="4dp"

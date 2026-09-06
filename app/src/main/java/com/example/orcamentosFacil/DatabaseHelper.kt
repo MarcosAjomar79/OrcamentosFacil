@@ -265,4 +265,63 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(
             arrayOf(id.toString())
         )
     }
+
+    fun buscarOrcamentos(termo: String): List<Orcamento> {
+
+        val termoLimpo = termo.trim()
+
+        if (termoLimpo.isEmpty()) {
+            return listarOrcamentos()
+        }
+
+        val lista = mutableListOf<Orcamento>()
+
+        val busca = "%$termoLimpo%"
+
+        readableDatabase.rawQuery(
+            """
+        SELECT *
+        FROM orcamentos
+        WHERE cliente LIKE ?
+           OR numero LIKE ?
+        ORDER BY id DESC
+        """.trimIndent(),
+            arrayOf(busca, busca)
+        ).use { cursor ->
+
+            while (cursor.moveToNext()) {
+
+                lista.add(
+                    Orcamento(
+                        id = cursor.getLong(
+                            cursor.getColumnIndexOrThrow("id")
+                        ),
+                        numero = cursor.getString(
+                            cursor.getColumnIndexOrThrow("numero")
+                        ),
+                        cliente = cursor.getString(
+                            cursor.getColumnIndexOrThrow("cliente")
+                        ),
+                        telefone = cursor.getString(
+                            cursor.getColumnIndexOrThrow("telefone")
+                        ) ?: "",
+                        data = cursor.getString(
+                            cursor.getColumnIndexOrThrow("data")
+                        ),
+                        validade = cursor.getString(
+                            cursor.getColumnIndexOrThrow("validade")
+                        ) ?: "",
+                        observacoes = cursor.getString(
+                            cursor.getColumnIndexOrThrow("observacoes")
+                        ) ?: "",
+                        total = cursor.getDouble(
+                            cursor.getColumnIndexOrThrow("total")
+                        )
+                    )
+                )
+            }
+        }
+
+        return lista
+    }
 }
